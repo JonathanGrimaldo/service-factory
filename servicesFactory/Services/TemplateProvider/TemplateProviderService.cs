@@ -12,7 +12,6 @@ namespace servicesFactory.Services.TemplateProvider
             {
                 Type templateClassType = GetTemplateClass(serviceType);
 
-                // 2. Usar reflexión para encontrar la propiedad estática.
                 PropertyInfo? templateProperty = templateClassType.GetProperty(templateName, BindingFlags.Public | BindingFlags.Static);
 
                 if (templateProperty == null)
@@ -20,8 +19,7 @@ namespace servicesFactory.Services.TemplateProvider
                     throw new ArgumentException($"La plantilla '{templateName}' no se encontró en la clase '{templateClassType.Name}'.");
                 }
 
-                // 3. Obtener el valor de la propiedad.
-                return (string)templateProperty.GetValue(null); // 'null' porque es una propiedad estática.
+                return (string)templateProperty.GetValue(null);
             }
             catch
             {
